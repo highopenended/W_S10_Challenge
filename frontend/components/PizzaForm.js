@@ -9,7 +9,6 @@ export default function PizzaForm() {
   const [createOrder, {
     error: createOrderError,
     isLoading: createOrderLoading,
-    isSuccess:createOrderSuccess,
   }] = useCreateOrderMutation()
 
   function nameChangeHandler(evt){
@@ -33,7 +32,7 @@ export default function PizzaForm() {
     createOrder(newOrder)
     .unwrap()
     .then(data=>{
-      // console.log(data)
+      console.log(data)
       dispatch(resetForm())
     })
     .catch(err=>{
