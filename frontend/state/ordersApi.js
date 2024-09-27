@@ -10,7 +10,6 @@ export const ordersApi = createApi({
   })
 })
 
-// Auto-generated hook for the 'getUsers' query
 export const {
     useGetOrdersQuery,
 } = ordersApi
