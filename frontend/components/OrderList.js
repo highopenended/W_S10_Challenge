@@ -9,8 +9,6 @@ export default function OrderList() {
   const {sizeFilter} = useSelector(st => st.sizeFilterState)
   const dispatch = useDispatch()
 
-  console.log(sizeFilter)
-
   let key=0
   function getKey(){
     key++
@@ -19,8 +17,6 @@ export default function OrderList() {
 
 
   function sizeFilterClickHandler(evt){
-    // setSizeFilter(evt.target.textContent)
-
     dispatch(setSizeFilter(evt.target.textContent))
   }
 
@@ -39,7 +35,7 @@ export default function OrderList() {
                     `${order.customer} ordered a size ${order.size} with ${order.toppings.length} topping${order.toppings.length>1 ? 's' : ''}`
                   }
                 </div>
-              </li>            
+              </li>
             )
           })
         }

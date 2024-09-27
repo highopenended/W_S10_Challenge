@@ -1,14 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { ordersApi } from './ordersApi'
 import sizeFilterReducer from './sizeFilterSlice'
-
-// const exampleReducer = (state = { count: 0 }) => {
-//   return state
-// }
+import formValuesReducer from './formValuesSlice'
 
 export const resetStore = () => configureStore({
   reducer: {
     sizeFilterState:sizeFilterReducer,
+    formValuesState:formValuesReducer,
     [ordersApi.reducerPath]: ordersApi.reducer,
   },
   middleware: getDefault => getDefault().concat(

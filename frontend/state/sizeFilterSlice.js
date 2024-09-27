@@ -8,8 +8,6 @@ const sizeFilterSlice = createSlice({
   reducers: {
     setSizeFilter(state, action){
       state.sizeFilter=action.payload
-      console.log(state)
-      console.log(action)
     }
   }
 })
