@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setFullName, setSize, toggleCheckbox } from '../state/formValuesSlice'
+import { resetForm, setFullName, setSize, toggleCheckbox } from '../state/formValuesSlice'
 import { useCreateOrderMutation } from '../state/ordersApi'
 
 export default function PizzaForm() {
@@ -9,14 +9,9 @@ export default function PizzaForm() {
   const [createOrder, {
     error: createOrderError,
     isLoading: createOrderLoading,
+    isSuccess:createOrderSuccess,
   }] = useCreateOrderMutation()
 
-
-  if(createOrderError){
-    console.log(createOrderError.data.message)
-  }
-  
-  
   function nameChangeHandler(evt){
     dispatch(setFullName(evt.target.value))
   }
@@ -36,17 +31,29 @@ export default function PizzaForm() {
       toppings:toppingsList}
 
     createOrder(newOrder)
+    .unwrap()
+    .then(data=>{
+      // console.log(data)
+      dispatch(resetForm())
+    })
+    .catch(err=>{
+      console.log(err)
+    })
   }
+
+  if(createOrderError){console.log(createOrderError.message)}
+
+
+
+
+
 
   return (
     <form>
-      <h2>Pizza Form</h2>
-      {/* {true && <div className='pending'>Order in progress...</div>} */}
-      {/* {true && <div className='failure'>Order failed: fullName is required</div>} */}
-      
-      {createOrderLoading && <div className='pending'>Order in progress...</div>}
-      {createOrderError && <div className='failure'>Order failed: fullName is required</div>}
-
+      <h2>Pizza Form</h2>      
+      {(createOrderLoading) && <div className='pending'>Order in progress...</div>}
+      {createOrderError && <div className='failure'>Order failed: {createOrderError.data.message}</div>}
+  
       <div className="input-group">
         <div>
           <label htmlFor="fullName">Full Name</label><br />

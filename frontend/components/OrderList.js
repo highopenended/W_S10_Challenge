@@ -20,6 +20,15 @@ export default function OrderList() {
     dispatch(setSizeFilter(evt.target.textContent))
   }
 
+  function getToppingsMessage(order){
+    let toppingsMsg
+    if(order.toppings){
+      toppingsMsg=`${order.customer} ordered a size ${order.size} with ${order.toppings.length} topping${order.toppings.length>1 ? 's' : ''}`
+    }else{
+      toppingsMsg=`${order.customer} ordered a size ${order.size} with no toppings` 
+    }
+    return toppingsMsg
+  }
 
   return (
     <div id="orderList">
@@ -31,9 +40,7 @@ export default function OrderList() {
               (order.size===sizeFilter || sizeFilter === "All") &&
               <li key={getKey()}>
                 <div>
-                  {
-                    `${order.customer} ordered a size ${order.size} with ${order.toppings.length} topping${order.toppings.length>1 ? 's' : ''}`
-                  }
+                  {getToppingsMessage(order)}
                 </div>
               </li>
             )

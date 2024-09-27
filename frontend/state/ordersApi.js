@@ -4,17 +4,18 @@ export const ordersApi = createApi({
   reducerPath: 'ordersApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:9009/api/pizza/' }),
   tagTypes: ['Orders'], 
-  endpoints: builder => ({
-    getOrders: builder.query({
+  endpoints: build => ({
+    getOrders: build.query({
       query: () => 'history',
-      // providesTags: ['Orders'],
+      providesTags: ['Orders'],
     }),
-    createOrder: builder.mutation({
+    createOrder: build.mutation({
       query: order => ({
         url: 'order',
         method: 'POST',
         body: order,
       }),
+      invalidatesTags:['Orders']
     })
   })
 })

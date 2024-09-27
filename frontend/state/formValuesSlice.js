@@ -14,6 +14,13 @@ const formValuesSlice = createSlice({
     ],
   },
   reducers: {
+    resetForm(state){
+        state.fullName=''
+        state.size=''
+        state.toppings.map(topping=>{
+            topping.selected=false
+        })
+    },
     setFullName(state, action){
       state.fullName=action.payload
     },
@@ -22,13 +29,15 @@ const formValuesSlice = createSlice({
     },
     toggleCheckbox(state,action){
         const {index}=action.payload
+        console.log(index)
         state.toppings[index].selected=!state.toppings[index].selected
     }
   }
 })
 
 export default formValuesSlice.reducer
-export const {  
+export const {
+    resetForm,
     setFullName,
     setSize,
     toggleCheckbox,
