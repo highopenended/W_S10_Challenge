@@ -6,14 +6,10 @@ import { store } from '../state/store'
 
 export default function App() {
 
-  // console.log(orders)
-
   return (
-    <Provider store = {store}>
       <div id="app">
         <PizzaForm />
         <OrderList />
       </div>
-    </Provider>
   )
 }
